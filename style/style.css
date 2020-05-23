@@ -1,0 +1,83 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,700;1,400&display=swap');
+
+body {
+    width: 100%;
+    font-family: 'Lato', sans-serif;
+    overflow-x: hidden;
+}
+
+textarea {
+    width:720px;
+    margin-bottom: 20px;
+    height: 300px;
+    resize: none;
+}
+
+.keyboard {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    background-color: #000;
+    width: 720px;
+    padding: 0 0 5px 0;
+    margin:0 auto;
+    
+}
+
+.key {
+    background-color: rgb(99, 99, 99);
+    color: #fff;
+    display: flex;
+    width: 40px;
+    height: 40px;
+    margin: 5px 0 0 5px;
+    justify-content: center;
+    align-items: center;
+    transition: 1s all;
+    cursor: pointer;
+    transition: max-height 1s ease-out;
+    overflow: hidden;
+}
+
+.key:first-child{
+    margin-left: 0;
+}
+
+.key:hover {
+    background-color: rgb(252, 104, 104);
+}
+
+.key-press {
+    max-height: 30px;
+    transition: max-height 1s ease-in;
+}
+
+.backspace-key {
+    width: 95px;
+}
+
+.tab-key {
+    width: 50px;
+    margin-left: 0;
+}
+
+.special-key {
+    background-color:rgb(49, 49, 49);
+}
+
+.caps-key {
+    width: 80px;
+    margin-left: 0;
+}
+
+.enter-key {
+    width: 100px;
+}
+
+.shift-key {
+    width: 90px;
+}
+.space-key {
+    width: 365px;
+}
