@@ -13,7 +13,12 @@ textA.setAttribute('id', 'note');
 document.body.appendChild(textA);
 
 
-let language = 2
+let language = 1
+
+// localStorage.setItem("langMem", language);
+language = JSON.parse(localStorage.getItem("langMem"));
+// console.log(JSON.parse(localStorage.getItem("langMem")))
+// console.log(language)
 
 const englishFirstRow = ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p']
 const englishSecondRow = ['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l']
@@ -43,8 +48,6 @@ class Keyboard {
     createKeyboard(lang) {
         if (lang === 1) {
             console.log('english layout')
-            // this.val = commonZero.map((item) => '<div class="key regular-key">' + item + '</div>')
-            //     .concat('<div class="key special-key">' + special[0] + '</div>' + '</div>')
                         
             this.val = commonZero.map((item) => '<div class="key regular-key" onclick="keyPress('+ '\'' + item + '\'' +')" id="' + item + '">' + item + '</div>')
                 .concat('<div class="key backspace-key special-key" onclick="keyPress('+ '\'' + special[0] + '\'' +')" id="' + special[0] + '">' + special[0] + '</div>')
@@ -72,8 +75,6 @@ class Keyboard {
             return this
         } else if (lang === 2){
             console.log('greek layout')
-            // this.val = commonZero.map((item) => '<div class="key regular-key">' + item + '</div>')
-            //     .concat('<div class="key special-key">' + special[0] + '</div>' + '</div>')
                         
             this.val = commonZero.map((item) => '<div class="key regular-key" onclick="keyPress('+ '\'' + item + '\'' +')" id="' + item + '">' + item + '</div>')
                 .concat('<div class="key backspace-key special-key" onclick="keyPress('+ '\'' + special[0] + '\'' +')" id="' + special[0] + '">' + special[0] + '</div>')
@@ -104,17 +105,27 @@ class Keyboard {
 
 }
 
-
-// document.addEventListener('keydown', logKey) 
-
-// function logKey(e) {
-//     console.log(e.key)
-// }
+const keySequence = []
 
 document.addEventListener('keydown', logKey) 
 
+let pressedShift = false
+let pressedCaps = false
+
+document.addEventListener('keyup', (e) => {
+    if(e.code === 'ShiftLeft' || e.code === 'ShiftRight')
+    pressedShift = false
+})
+
 function logKey(e) {
-    
+    if (e.getModifierState('CapsLock')) {
+        pressedCaps = true
+        document.getElementById('CapsLock').classList.add('caps-key-on')
+    } else {
+        pressedCaps = false
+        document.getElementById('CapsLock').classList.remove('caps-key-on')
+    }
+
     if (e.code === 'Tab') {
         e.preventDefault();
     }
@@ -133,7 +144,19 @@ function logKey(e) {
     else {
         key = e.key
     }
-    
+
+    if ((keySequence[keySequence.length - 1] === 'Ctrl' && key === "Alt")){
+        if (language === 1) {
+            language = 2
+            localStorage.setItem("langMem", 2);
+            
+        } else {
+            language = 1
+            localStorage.setItem("langMem", 1);
+        }
+        keyboard.innerHTML = englishKeyboard.createKeyboard(language).val.join('')
+    }
+    keySequence.push(key)
     keyPress(key)
     
 }
@@ -143,14 +166,11 @@ function logKey(e) {
 const keyPress = (key) => {
     console.log(key)
     let pressedKey 
-    
     if (key.length === 1) {
         pressedKey = document.getElementById(key.toLowerCase())
     } else {
         pressedKey = document.getElementById(key)
     }
-    
-    console.log(pressedKey)
     if (!pressedKey.classList.contains('key-press')) {
         pressedKey.classList.add("key-press")
     } else {
@@ -158,11 +178,16 @@ const keyPress = (key) => {
     }
     setTimeout(() => {
         pressedKey.classList.remove("key-press")
-    },500)
+    },200)
     addText(key)
 }
 
+
+
 const addText = (sign) => {
+    console.log(keySequence)
+
+    
     if (sign === special[0]) {
         if(textA.textContent.length > 0) {
             textA.textContent = textA.textContent.substr(0, textA.textContent.length - 1)
@@ -180,11 +205,25 @@ const addText = (sign) => {
     }
     else if (sign === 'Del') {
         textA.textContent +=  ''
-    } else if (sign === 'Shift') {
+    } else if (language === 2 && keySequence[keySequence.length - 2] === 'Shift') {
+        pressedShift = true
+    } else if (pressedShift) {
+        textA.textContent += sign.toUpperCase()
+    } 
+    else if (sign === 'CapsLock') {
         textA.textContent +=  ''
+    } 
+    else if (sign === 'Shift') {
+        textA.textContent +=  ''
+    } else if (sign === 'Win') {
+        textA.textContent +=  ''
+    } else if (sign === 'Ctrl' || sign === 'Alt') {
+        textA.textContent +=  ''
+    } else if (pressedCaps) {
+        textA.textContent += sign.toUpperCase()
+        
     }
-     else {
-         console.log(sign)
+    else {
         textA.textContent += sign
     }
 }

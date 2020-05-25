@@ -70,6 +70,9 @@ textarea {
     width: 80px;
     margin-left: 0;
 }
+.caps-key-on {
+    color: rgb(16, 196, 0);
+}
 
 .enter-key {
     width: 100px;
