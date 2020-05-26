@@ -164,7 +164,7 @@ function logKey(e) {
 
 
 const keyPress = (key) => {
-    console.log(key)
+    // console.log(key)
     const commonAndAltKeys = ['`' , '~', '1', '!', '2', '@', '3', '#', '4', '$', '5', '%', '6', '^', '7', '&', '8', '*', '9', '(', '0', ')', '-', '_', '=', '+',
                             '[', '{', ']', '}', '\\', '|', ';', ':', '\'', '"', ',', '<', '.', '>', '/', '?']
     const commonAltKeys = [ '~',  '!',  '@',  '#',  '$',  '%',  '^',  '&',  '*',  '(',  ')',  '_',  '+',  '{',  '}',  '|',  ':',  '"',  '<',  '>',  '?']
@@ -185,6 +185,8 @@ const keyPress = (key) => {
         } else if (key ==='CapsLock' && pressedCaps){
             pressedCaps = false
             document.getElementById('CapsLock').classList.remove('caps-key-on')
+        } else if (key === 'Alt right'){
+            key = 'Alt'
         }
         let pressedKey 
         if (key.length === 1) {
@@ -208,7 +210,7 @@ const keyPress = (key) => {
 
 
 const addText = (sign) => {
-    console.log(keySequence)
+    // console.log(keySequence)
 
     
     if (sign === special[0]) {
@@ -251,8 +253,8 @@ const addText = (sign) => {
 }
 
 
-let englishKeyboard = new Keyboard([], "", 2)
-console.log(englishKeyboard.createKeyboard(language))
+let englishKeyboard = new Keyboard()
+
 
 let keyboard = document.createElement('div')
 

@@ -4,13 +4,15 @@ body {
     width: 100%;
     font-family: 'Lato', sans-serif;
     overflow-x: hidden;
+  
 }
 
 textarea {
     width:720px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     height: 300px;
     resize: none;
+
 }
 
 .keyboard {
@@ -21,8 +23,6 @@ textarea {
     background-color: #000;
     width: 720px;
     padding: 0 0 5px 0;
-    margin:0 auto;
-    
 }
 
 .key {
