@@ -2,7 +2,7 @@
 
 
 var div = document.createElement('div');
-div.textContent = "Sup, y'all?";
+div.textContent = "Welcome to my virtual keyboard for Windows. Change layout by pressing ctrl + alt";
 div.setAttribute('class', 'note');
 document.body.appendChild(div);
 
@@ -48,8 +48,8 @@ class Keyboard {
     createKeyboard(lang) {
         if (lang === 1) {
             console.log('english layout')
-                        
-            this.val = commonZero.map((item) => '<div class="key regular-key" onclick="keyPress('+ '\'' + item + '\'' +')" id="' + item + '">' + item + '</div>')
+                      
+            this.val = commonZero.map((item) => '<div class="key regular-key double-key" onclick="keyPress('+ '\'' + item + '\'' +')" id="' + item + '">' + item + '</div>')
                 .concat('<div class="key backspace-key special-key" onclick="keyPress('+ '\'' + special[0] + '\'' +')" id="' + special[0] + '">' + special[0] + '</div>')
                 .concat('<div class="key tab-key special-key" onclick="keyPress('+ '\'' + special[1] + '\'' +')" id="' + special[1] + '">' + special[1] + '</div>')
                 .concat(englishFirstRow.map((item) => '<div class="key regular-key" onclick="keyPress('+ '\'' + item + '\'' +')" id="' + item + '">' + item + '</div>'))
@@ -165,21 +165,44 @@ function logKey(e) {
 
 const keyPress = (key) => {
     console.log(key)
-    let pressedKey 
-    if (key.length === 1) {
-        pressedKey = document.getElementById(key.toLowerCase())
+    const commonAndAltKeys = ['`' , '~', '1', '!', '2', '@', '3', '#', '4', '$', '5', '%', '6', '^', '7', '&', '8', '*', '9', '(', '0', ')', '-', '_', '=', '+',
+                            '[', '{', ']', '}', '\\', '|', ';', ':', '\'', '"', ',', '<', '.', '>', '/', '?']
+    const commonAltKeys = [ '~',  '!',  '@',  '#',  '$',  '%',  '^',  '&',  '*',  '(',  ')',  '_',  '+',  '{',  '}',  '|',  ':',  '"',  '<',  '>',  '?']
+
+    if (commonAltKeys.includes(key)) {
+        commonAndAltKeys.map((item, index) => {
+            if (index % 2 !== 0) {
+                if (key === item) {
+                    addText(key)
+                    key = commonAndAltKeys[index - 1]
+                }
+            }
+        })
     } else {
-        pressedKey = document.getElementById(key)
+        if (key ==='CapsLock' && !pressedCaps) {
+            pressedCaps = true
+            document.getElementById('CapsLock').classList.add('caps-key-on')
+        } else if (key ==='CapsLock' && pressedCaps){
+            pressedCaps = false
+            document.getElementById('CapsLock').classList.remove('caps-key-on')
+        }
+        let pressedKey 
+        if (key.length === 1) {
+            pressedKey = document.getElementById(key.toLowerCase())
+        } else {
+            pressedKey = document.getElementById(key)
+        }
+
+        if (!pressedKey.classList.contains('key-press')) {
+            pressedKey.classList.add("key-press")
+        } else {
+            pressedKey.classList.remove("key-press")
+        }
+        setTimeout(() => {
+            pressedKey.classList.remove("key-press")
+        },200)
+        addText(key)
     }
-    if (!pressedKey.classList.contains('key-press')) {
-        pressedKey.classList.add("key-press")
-    } else {
-        pressedKey.classList.remove("key-press")
-    }
-    setTimeout(() => {
-        pressedKey.classList.remove("key-press")
-    },200)
-    addText(key)
 }
 
 
@@ -196,7 +219,6 @@ const addText = (sign) => {
         textA.textContent += " "
     } 
     else if (sign === "Enter") {
-        console.log('siema neter')
         textA.textContent += "\n"
     }  
     else if (sign === 'Tab') {
@@ -205,23 +227,23 @@ const addText = (sign) => {
     }
     else if (sign === 'Del') {
         textA.textContent +=  ''
-    } else if (language === 2 && keySequence[keySequence.length - 2] === 'Shift') {
+    } else if (language === 2 && (keySequence[keySequence.length - 1] === 'Shift' || keySequence[keySequence.length - 1] === 'Shift right' )) {
         pressedShift = true
-    } else if (pressedShift) {
+    } 
+    else if (pressedShift) {
         textA.textContent += sign.toUpperCase()
     } 
     else if (sign === 'CapsLock') {
         textA.textContent +=  ''
     } 
-    else if (sign === 'Shift') {
+    else if (sign === 'Shift' || sign === 'Shift right') {
         textA.textContent +=  ''
     } else if (sign === 'Win') {
         textA.textContent +=  ''
-    } else if (sign === 'Ctrl' || sign === 'Alt') {
+    } else if (sign === 'Ctrl' || sign === 'Ctrl right' || sign === 'Alt') {
         textA.textContent +=  ''
     } else if (pressedCaps) {
         textA.textContent += sign.toUpperCase()
-        
     }
     else {
         textA.textContent += sign
