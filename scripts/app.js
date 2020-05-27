@@ -236,11 +236,11 @@ const addText = (sign) => {
 }
 
 
-let englishKeyboard = new Keyboard()
+let myVirtualKeyboard = new Keyboard()
 
 let keyboard = document.createElement('div')
 
 keyboard.className = "keyboard"
 
-keyboard.innerHTML = englishKeyboard.createKeyboard(language).val
+keyboard.innerHTML = myVirtualKeyboard.createKeyboard(language).val
 document.body.appendChild(keyboard)
