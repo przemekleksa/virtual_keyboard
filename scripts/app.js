@@ -101,13 +101,13 @@ let keyboard = document.createElement('div')
 
 keyboard.className = "keyboard"
 
-console.log(Object.values(myVirtualKeyboard))
-console.log(myVirtualKeyboard.createKeyboard(language))
-let html = myVirtualKeyboard.createKeyboard(language).val
+// console.log(Object.values(myVirtualKeyboard))
+// console.log(myVirtualKeyboard.createKeyboard(language))
+// let html = myVirtualKeyboard.createKeyboard(language).val
 
-console.log(html)
-// keyboard.innerHTML = myVirtualKeyboard.createKeyboard(language).val
-keyboard.innerHTML = html
+// console.log(html)
+keyboard.innerHTML = myVirtualKeyboard.createKeyboard(language).val
+// keyboard.innerHTML = html
 document.body.appendChild(keyboard)
 
 const keySequence = []
