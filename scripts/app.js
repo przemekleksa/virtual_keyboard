@@ -1,24 +1,16 @@
-
-
-
 var div = document.createElement('div');
 div.textContent = "Welcome to my virtual keyboard for Windows. Change layout by pressing ctrl + alt";
 div.setAttribute('class', 'note');
 document.body.appendChild(div);
 
 var textA = document.createElement('textarea');
-// textA.textContent = "Sup, y'all?";
 textA.setAttribute('id', 'note');
 
 document.body.appendChild(textA);
 
 
 let language = 1
-
-// localStorage.setItem("langMem", language);
 language = JSON.parse(localStorage.getItem("langMem"));
-// console.log(JSON.parse(localStorage.getItem("langMem")))
-// console.log(language)
 
 const englishFirstRow = ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p']
 const englishSecondRow = ['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l']
@@ -34,9 +26,6 @@ const commonSecond = [';', '\'']
 const commonThird = [',', '.', '/']
 
 const special = ['Backspace', 'Tab', 'Del', 'CapsLock', 'Enter', 'Shift', '◄', '▼', '►', '▲', 'Ctrl', 'Win', 'Alt', '']
-
-
-
 
 
 class Keyboard {
@@ -102,7 +91,6 @@ class Keyboard {
             return this
         }
     }
-
 }
 
 const keySequence = []
@@ -158,13 +146,9 @@ function logKey(e) {
     }
     keySequence.push(key)
     keyPress(key)
-    
 }
 
-
-
 const keyPress = (key) => {
-    // console.log(key)
     const commonAndAltKeys = ['`' , '~', '1', '!', '2', '@', '3', '#', '4', '$', '5', '%', '6', '^', '7', '&', '8', '*', '9', '(', '0', ')', '-', '_', '=', '+',
                             '[', '{', ']', '}', '\\', '|', ';', ':', '\'', '"', ',', '<', '.', '>', '/', '?']
     const commonAltKeys = [ '~',  '!',  '@',  '#',  '$',  '%',  '^',  '&',  '*',  '(',  ')',  '_',  '+',  '{',  '}',  '|',  ':',  '"',  '<',  '>',  '?']
@@ -209,10 +193,7 @@ const keyPress = (key) => {
 
 
 
-const addText = (sign) => {
-    // console.log(keySequence)
-
-    
+const addText = (sign) => {    
     if (sign === special[0]) {
         if(textA.textContent.length > 0) {
             textA.textContent = textA.textContent.substr(0, textA.textContent.length - 1)
@@ -255,11 +236,9 @@ const addText = (sign) => {
 
 let englishKeyboard = new Keyboard()
 
-
 let keyboard = document.createElement('div')
 
 keyboard.className = "keyboard"
-
 
 keyboard.innerHTML = englishKeyboard.createKeyboard(language).val.join('')
 document.body.appendChild(keyboard)
