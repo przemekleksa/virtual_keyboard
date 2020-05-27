@@ -12,7 +12,7 @@ document.body.appendChild(textA);
 let language = 1
 
 console.log(localStorage.langMem)
-if (parseInt(localStorage.langMem) !== language){
+if (parseInt(localStorage.langMem) !== language && localStorage.langMem !== 'undefined'){
     language = parseInt(localStorage.langMem)
 }
 
