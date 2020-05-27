@@ -241,6 +241,6 @@ let englishKeyboard = new Keyboard()
 let keyboard = document.createElement('div')
 
 keyboard.className = "keyboard"
-console.log(englishKeyboard.createKeyboard(language).val)
+
 keyboard.innerHTML = englishKeyboard.createKeyboard(language).val
 document.body.appendChild(keyboard)
