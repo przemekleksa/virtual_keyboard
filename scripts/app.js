@@ -95,6 +95,15 @@ class Keyboard {
     }
 }
 
+let myVirtualKeyboard = new Keyboard()
+
+let keyboard = document.createElement('div')
+
+keyboard.className = "keyboard"
+
+keyboard.innerHTML = myVirtualKeyboard.createKeyboard(language).val
+document.body.appendChild(keyboard)
+
 const keySequence = []
 
 document.addEventListener('keydown', logKey) 
@@ -236,11 +245,4 @@ const addText = (sign) => {
 }
 
 
-let myVirtualKeyboard = new Keyboard()
 
-let keyboard = document.createElement('div')
-
-keyboard.className = "keyboard"
-
-keyboard.innerHTML = myVirtualKeyboard.createKeyboard(language).val
-document.body.appendChild(keyboard)
