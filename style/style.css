@@ -12,7 +12,10 @@ textarea {
     margin-bottom: 10px;
     height: 300px;
     resize: none;
+}
 
+textarea:focus {
+	outline: none;
 }
 
 .keyboard {
