@@ -61,6 +61,7 @@ class Keyboard {
                 .concat('<div class="key special-key" onclick="keyPress('+ '\'' + special[7] + '\'' +')" id="' + special[7] + '">' + special[7] + '</div>')
                 .concat('<div class="key special-key" onclick="keyPress('+ '\'' + special[8] + '\'' +')" id="' + special[8] + '">' + special[8] + '</div>')
                 .concat('<div class="key special-key" onclick="keyPress('+ '\'' + special[10] + ' right' +  '\'' +')" id="' + special[10] + ' right' + '">' + special[10] + '</div>')
+                this.val = this.val.join('')
             return this
         } else if (lang === 2){
             console.log('greek layout')
@@ -88,6 +89,7 @@ class Keyboard {
                 .concat('<div class="key special-key" onclick="keyPress('+ '\'' + special[7] + '\'' +')" id="' + special[7] + '">' + special[7] + '</div>')
                 .concat('<div class="key special-key" onclick="keyPress('+ '\'' + special[8] + '\'' +')" id="' + special[8] + '">' + special[8] + '</div>')
                 .concat('<div class="key special-key" onclick="keyPress('+ '\'' + special[10] + ' right' +  '\'' +')" id="' + special[10] + ' right' + '">' + special[10] + '</div>')
+                this.val = this.val.join('')
             return this
         }
     }
@@ -239,6 +241,6 @@ let englishKeyboard = new Keyboard()
 let keyboard = document.createElement('div')
 
 keyboard.className = "keyboard"
-
-keyboard.innerHTML = englishKeyboard.createKeyboard(language).val.join('')
+console.log(englishKeyboard.createKeyboard(language).val)
+keyboard.innerHTML = englishKeyboard.createKeyboard(language).val
 document.body.appendChild(keyboard)
