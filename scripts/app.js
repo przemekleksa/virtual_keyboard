@@ -5,6 +5,7 @@ document.body.appendChild(div);
 
 var textA = document.createElement('textarea');
 textA.setAttribute('id', 'note');
+textA.setAttribute('readonly', '');
 
 document.body.appendChild(textA);
 
