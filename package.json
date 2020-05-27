@@ -10,7 +10,9 @@
   "license": "ISC",
   "homepage": "https://przemekleksa.github.io/virtual_keyboard",
   "devDependencies": {
-    "eslint": "^7.0.0"
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.1.0",
+    "eslint-plugin-import": "^2.20.2"
   },
   "dependencies": {
     "gh-pages": "^2.2.0"
