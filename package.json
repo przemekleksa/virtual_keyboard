@@ -4,11 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "deploy": "gh-pages"
   },
   "author": "",
   "license": "ISC",
+  "homepage": "https://przemekleksa.github.io/virtual_keyboard",
   "devDependencies": {
     "eslint": "^7.0.0"
+  },
+  "dependencies": {
+    "gh-pages": "^2.2.0"
   }
 }
