@@ -10,11 +10,7 @@ document.body.appendChild(textA);
 
 
 let language = 1
-
-console.log(localStorage.langMem)
-if (parseInt(localStorage.langMem) !== language){
-    language = parseInt(localStorage.langMem)
-}
+language = JSON.parse(localStorage.getItem("langMem"));
 
 const englishFirstRow = ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p']
 const englishSecondRow = ['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l']
@@ -31,10 +27,11 @@ const commonThird = [',', '.', '/']
 
 const special = ['Backspace', 'Tab', 'Del', 'CapsLock', 'Enter', 'Shift', '◄', '▼', '►', '▲', 'Ctrl', 'Win', 'Alt', '']
 
-
 class Keyboard {
-    constructor(val = []) {
+    constructor(val = [], text, lang) {
         this.val = val
+        this.text = text
+        this.lang = lang
     }
     createKeyboard(lang) {
         if (lang === 1) {
@@ -94,8 +91,24 @@ class Keyboard {
                 this.val = this.val.join('')
             return this
         }
+        return this.val
     }
 }
+
+let myVirtualKeyboard = new Keyboard()
+
+let keyboard = document.createElement('div')
+
+keyboard.className = "keyboard"
+
+// console.log(Object.values(myVirtualKeyboard))
+// console.log(myVirtualKeyboard.createKeyboard(language))
+// let html = myVirtualKeyboard.createKeyboard(language).val
+
+// console.log(html)
+keyboard.innerHTML = myVirtualKeyboard.createKeyboard(language).val
+// keyboard.innerHTML = html
+document.body.appendChild(keyboard)
 
 const keySequence = []
 
@@ -146,7 +159,7 @@ function logKey(e) {
             language = 1
             localStorage.setItem("langMem", 1);
         }
-        keyboard.innerHTML = englishKeyboard.createKeyboard(language).val
+        keyboard.innerHTML = myVirtualKeyboard.createKeyboard(language).val
     }
     keySequence.push(key)
     keyPress(key)
@@ -238,11 +251,4 @@ const addText = (sign) => {
 }
 
 
-let englishKeyboard = new Keyboard()
 
-let keyboard = document.createElement('div')
-
-keyboard.className = "keyboard"
-
-keyboard.innerHTML = englishKeyboard.createKeyboard(language).val
-document.body.appendChild(keyboard)
