@@ -27,7 +27,6 @@ const commonThird = [',', '.', '/']
 
 const special = ['Backspace', 'Tab', 'Del', 'CapsLock', 'Enter', 'Shift', '◄', '▼', '►', '▲', 'Ctrl', 'Win', 'Alt', '']
 
-
 class Keyboard {
     constructor(val = [], text, lang) {
         this.val = val
@@ -92,6 +91,7 @@ class Keyboard {
                 this.val = this.val.join('')
             return this
         }
+        return this.val
     }
 }
 
@@ -100,6 +100,7 @@ let myVirtualKeyboard = new Keyboard()
 let keyboard = document.createElement('div')
 
 keyboard.className = "keyboard"
+console.log(myVirtualKeyboard.createKeyboard(language))
 
 keyboard.innerHTML = myVirtualKeyboard.createKeyboard(language).val
 document.body.appendChild(keyboard)
@@ -153,7 +154,7 @@ function logKey(e) {
             language = 1
             localStorage.setItem("langMem", 1);
         }
-        keyboard.innerHTML = englishKeyboard.createKeyboard(language).val.join('')
+        keyboard.innerHTML = myVirtualKeyboard.createKeyboard(language).val
     }
     keySequence.push(key)
     keyPress(key)
