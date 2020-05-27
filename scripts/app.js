@@ -31,7 +31,7 @@ const commonThird = [',', '.', '/']
 
 const special = ['Backspace', 'Tab', 'Del', 'CapsLock', 'Enter', 'Shift', '◄', '▼', '►', '▲', 'Ctrl', 'Win', 'Alt', '']
 
-
+let uu = ''
 class Keyboard {
   constructor(val = []) {
     this.val = val
