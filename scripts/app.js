@@ -12,6 +12,11 @@ document.body.appendChild(textA)
 
 let language = 1
 
+if (localStorage.getItem('langMem') === null) {
+  localStorage.setItem('langMem', language);
+}
+console.log(localStorage)
+
 if (parseInt(localStorage.langMem, 0) !== language) {
   language = parseInt(localStorage.langMem, 0)
 }
@@ -202,6 +207,7 @@ const keyPress = (key) => {
 }
 
 function logKey(e) {
+// 	console.log(e.getModifierState('CapsLock'))
   if (e.getModifierState('CapsLock')) {
     pressedCaps = true
     document.getElementById('CapsLock').classList.add('caps-key-on')
