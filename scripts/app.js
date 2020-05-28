@@ -13,7 +13,7 @@ document.body.appendChild(textA)
 let language = 1
 
 if (localStorage.getItem('langMem') === null) {
-  localStorage.setItem('langMem', language);
+  localStorage.setItem('langMem', language)
 }
 console.log(localStorage)
 
